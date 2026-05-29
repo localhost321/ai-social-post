@@ -6,30 +6,31 @@ from instagrapi import Client
 import requests
 import os
 import time
+from dotenv import load_dotenv
+load_dotenv()
 
 # --- CONFIGURATION ---
-GEMINI_KEY = "AIzaSyBjp9fs6xFpk5l8o0z3UF009bnD5b2Q_ws"
-KLING_API_KEY = "7d99af24-16a6-4c60-8e97-2b826b7428b1:e36bd0f303bc0772dc186160b293ef6e" # Using AI/ML API for Kling v1
-IG_USERNAME = "traveller_bandar"
-IG_PASSWORD = "Deepu@1234"
+GEMINI_KEY = os.environ.get("GEMINI_KEY")
+KLING_API_KEY = os.environ.get("KLING_API_KEY")
+IG_USERNAME = os.environ.get("IG_USERNAME")
+IG_PASSWORD = os.environ.get("IG_PASSWORD")
 
 
 # instagram app id: 2669200206795188
 # instagram app secret : 23db7c6e70c079c0480b8c8e35de633e
 
-INSTA_USER_ID=17841431818580983
+INSTA_USER_ID=os.environ.get("INSTA_USER_ID")
 
 # shot lived instagram token
 # INSTA_ACCESS_TOKEN="EAAYTTQhSZBnABRYkPUtqDLafZB6LmHCS5wDBKqqeqKoHqY7J8okZBXVlq2X72ZCEZCUELa8RbxIvHZA3VStEJGHxRIZBTyYkASZBSiP38CmF4WIZB67vI1uvZBFIhApkrDOOYfr1P17pZCoGMducVjtWsRHqwYJoQrPnuFGNReD9jyZCK2ZCCECuzZCY4gy5sSZARqZCkQ3PWpgjo4BK4xLNrTrxkNBaS4SMHCcud8fu0wAXLs4j9zLwquQyCvBcUT1VeoxgQeztkyTRoRbp57WvLAmYBV0h"
 
 # 60 days live instagram token
-INSTA_ACCESS_TOKEN="EAAYTTQhSZBnABRSxTdUuZBqBSsTnAbWWIsldZAGLW9RAcDAcheMdO9IyntY3onRAvlofRwU79VuH48mpa7oDxDYMz48kNEojT3VlpaJZBeBYEBim13HVxU4DoLX1ZCt9H5PqB82yvUZAthXPyMCafZCutYG7VP6flIKCjvZAS5eOeuPZAfZA5trZBZBllnGYTpY7WrrW"
-import os
+INSTA_ACCESS_TOKEN=os.environ.get("INSTA_ACCESS_TOKEN")
 os.environ["FAL_KEY"] = KLING_API_KEY
 
 # --- SETUP GEMINI ---
 genai.configure(api_key=GEMINI_KEY)
-BUCKET_NAME = "aisocialbucket"
+BUCKET_NAME = os.environ.get("BUCKET_NAME")
 
 
 import os
@@ -66,7 +67,7 @@ def upload_image_to_s3(image_bytes):
 # 1. GENERATE IMAGE
 def generate_image(prompt, source):
     try:
-        print("here in this funtion to generate image")
+        print("here in this funtion to generate image", GEMINI_KEY)
         model = genai.GenerativeModel("gemini-3.1-flash-image-preview")
 
         response = model.generate_content(
@@ -160,13 +161,6 @@ if __name__ == "__main__":
         post_to_instagram(image_file, caption)
 
 
-
-
-# instagram app id: 2669200206795188
-# instagram app secret : 23db7c6e70c079c0480b8c8e35de633e
-
-# accoutnid: 17841431818580983
-# access token: IGAAl7n5opEbRBZAFoxc0U1WnY0UG1KTWJtNjRsVDB1cTBlUERkd180QTFTcENPa0RTTEE0ZAm1PTUY5ekRzTmlzMnc3cFlvTTBjaE9WbzRSRF83ckVhdUxNc09hZAWVrT25qd1J6RlRlZAGdoY1VHWWF4Q3FtZAVJ4dUs0MGpyZAXU3QQZDZD
 
 
 
