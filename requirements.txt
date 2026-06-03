@@ -5,4 +5,4 @@ Pillow==12.2.0
 protobuf==7.35.0
 python-dotenv==1.2.2
 python-telegram-bot==22.7
-Requests==2.34.2
+Requests
